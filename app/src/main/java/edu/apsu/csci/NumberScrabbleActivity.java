@@ -6,11 +6,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NumberScrabbleActivity extends AppCompatActivity {
     private HashMap<Integer, Integer> tttMap;
+    private ArrayList<Integer> numbersUsed;
     private int count=2;
     private int [] ids = {
         R.id.editText00, R.id.editText01, R.id.editText02,
@@ -34,6 +37,8 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         tttMap.put(R.id.editText21, R.id.textView21);
         tttMap.put(R.id.editText22, R.id.textView22);
 
+        numbersUsed = new ArrayList<>();
+
         findViewById(R.id.submit_button).setOnClickListener(new SubmitListener());
     }
 
@@ -56,11 +61,28 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                     Log.i("IDS", "Edit text string is " + etStr);
 
                     if(!etStr.equals("")) {
+                        int etNum = 0;
+                        try{
+                            etNum = Integer.parseInt(etStr);
+                        } catch(NumberFormatException ex){
+                            Log.i("NUMBER", "Invalid integer format");
+                        }
+
+                        numbersUsed.add(etNum);
+
                         int tvId = tttMap.get(id);
                         TextView tv = findViewById(tvId);
-                        tv.setText(etStr);
-                        tv.setVisibility(View.VISIBLE);
-                        editText.setVisibility(View.INVISIBLE);
+                        if(etNum>=1 && etNum<=9){
+                            for(int num : numbersUsed){
+                                
+                            }
+                            tv.setText(etStr);
+                            tv.setVisibility(View.VISIBLE);
+                            editText.setVisibility(View.INVISIBLE);
+                        } else{
+                            Toast.makeText(getApplicationContext(), "Not in the range", Toast.LENGTH_SHORT).show();
+                        }
+
                         String tvStr = tv.getText().toString();
                         Log.i("IDS", "Text view string is " + tvStr);
                     }
