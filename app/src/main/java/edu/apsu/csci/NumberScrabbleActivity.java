@@ -1,5 +1,6 @@
 package edu.apsu.csci;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -45,12 +46,6 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             TextView textView = findViewById(R.id.textView);
-            if(count % 2 == 0){
-                textView.setText("Player 1's Turn");
-            } else {
-                textView.setText("Player 2's Turn");
-            }
-            count+=1;
             EditText editText;
             String etStr;
 
@@ -74,25 +69,37 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
                         if(etNum>=1 && etNum<=9){
                             if(numbersUsed.isEmpty()){
+                                Log.i("WHERE", "I am in the isEmpty statement before, count is " + count);
                                 tv.setText(etStr);
                                 tv.setVisibility(View.VISIBLE);
                                 editText.setVisibility(View.INVISIBLE);
+                                Log.i("WHERE", "I am in the isEmpty statement, count is " + count);
+                                textView.setText("Player 2's Turn");
                                 numbersUsed.add(etNum);
+
                             } else {
                                 if(numbersUsed.contains(etNum)  && editText.isShown()) {
                                     Toast.makeText(getApplicationContext(), "Please enter a number that has not been entered already", Toast.LENGTH_SHORT).show();
-                                } else {
+                                } else if(!numbersUsed.contains(etNum)){
                                     tv.setText(etStr);
                                     tv.setVisibility(View.VISIBLE);
                                     editText.setVisibility(View.INVISIBLE);
+                                    numbersUsed.add(etNum);
+
+                                    if(count % 2 == 0){
+                                        textView.setText("Player 1's Turn");
+                                        Log.i("WHERE", "I am in the if statement, count is " + count);
+                                        count+=1;
+                                    } else {
+                                        textView.setText("Player 2's Turn");
+                                        Log.i("WHERE", "I am in the else statement, count is " + count);
+                                        count+=1;
+                                    }
                                 }
                             }
                         } else{
                             Toast.makeText(getApplicationContext(), "Not in the range", Toast.LENGTH_SHORT).show();
                         }
-
-
-
                     }
                 }
             }
