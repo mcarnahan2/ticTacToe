@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,7 +14,6 @@ public class NumberScrabbleActivity extends AppCompatActivity {
     private HashMap<Integer, Integer> tttMap;
     private ArrayList<Integer> numbersUsed;
     private int count=0;
-    private int it = 0;
     private int [] ids = {
         R.id.editText00, R.id.editText01, R.id.editText02,
         R.id.editText10, R.id.editText11, R.id.editText12,
@@ -59,7 +57,6 @@ public class NumberScrabbleActivity extends AppCompatActivity {
             for(int id : ids){
                 if(tttMap.containsKey(id)) {
                     editText = findViewById(id);
-                    Log.i("WHERE", "In if statement contains key id is " + id);
 
                     etStr = editText.getText().toString();
 
@@ -81,51 +78,24 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                                 tv.setVisibility(View.VISIBLE);
                                 editText.setVisibility(View.INVISIBLE);
                                 numbersUsed.add(etNum);
-                                Log.i("WHERE", "In empty " + etNum);
                             } else {
                                 if(numbersUsed.contains(etNum)  && editText.isShown()) {
                                     Toast.makeText(getApplicationContext(), "Please enter a number that has not been entered already", Toast.LENGTH_SHORT).show();
-                                    Log.i("WHERE", "In contains " + etNum);
                                 } else {
                                     tv.setText(etStr);
                                     tv.setVisibility(View.VISIBLE);
                                     editText.setVisibility(View.INVISIBLE);
-                                    Log.i("WHERE", "In else " + etNum);
                                 }
                             }
                         } else{
                             Toast.makeText(getApplicationContext(), "Not in the range", Toast.LENGTH_SHORT).show();
                         }
 
-                        String tvStr = tv.getText().toString();
+
+
                     }
                 }
             }
         }
     }
 }
-
-/*if(!etStr.equals("")) {
-                        int etNum = 0;
-                        try{
-                            etNum = Integer.parseInt(etStr);
-                        } catch(NumberFormatException ex){
-                            Log.i("NUMBER", "Invalid integer format");
-                        }
-
-                        numbersUsed.add(etNum);
-
-                        int tvId = tttMap.get(id);
-                        TextView tv = findViewById(tvId);
-                        if(etNum>=1 && etNum<=9){
-                            tv.setText(etStr);
-                            tv.setVisibility(View.VISIBLE);
-                            editText.setVisibility(View.INVISIBLE);
-
-                        } else{
-                            Toast.makeText(getApplicationContext(), "Not in the range", Toast.LENGTH_SHORT).show();
-                        }
-
-                        String tvStr = tv.getText().toString();
-                        Log.i("IDS", "Text view string is " + tvStr);
-                    }*/
