@@ -20,6 +20,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         R.id.editText10, R.id.editText11, R.id.editText12,
         R.id.editText20, R.id.editText21, R.id.editText22
     };
+    private TextView[][] textViews = new TextView[3][3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,14 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         tttMap.put(R.id.editText22, R.id.textView22);
 
         numbersUsed = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                String tvID = "textView" + i + j;
+                int id = getResources().getIdentifier(tvID, "id", getPackageName());
+                textViews[i][j] = findViewById(id);
+            }
+        }
 
         findViewById(R.id.submit_button).setOnClickListener(new SubmitListener());
     }
@@ -88,11 +97,9 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
                                     if(count % 2 == 0){
                                         textView.setText("Player 1's Turn");
-                                        Log.i("WHERE", "I am in the if statement, count is " + count);
                                         count+=1;
                                     } else {
                                         textView.setText("Player 2's Turn");
-                                        Log.i("WHERE", "I am in the else statement, count is " + count);
                                         count+=1;
                                     }
                                 }
@@ -103,6 +110,48 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                     }
                 }
             }
+
+            if(winner()){
+                Log.i("WHERE", "Winner");
+            }
+
         }
+    }
+
+    private boolean winner() {
+        Integer[][] position = new Integer[3][3];
+
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                try{
+                    position[i][j] = Integer.parseInt(textViews[i][j].getText().toString());
+                } catch(NumberFormatException ex){
+                    Log.i("IDS", "Invalid integer format");
+                }
+            }
+        }
+
+        for(int i = 0; i < 3; i++){
+            if(position[i][0] + position[i][1] + position[i][2] == 15 && position[i][0] != 0 && position[i][1] != 0 && position[i][2] != 0){
+                return true;
+            }
+        }
+
+        for(int i = 0; i < 3; i++){
+            if(position[0][i] + position[1][i] + position[2][i] == 15 && position[0][i] != 0 && position[1][i] != 0 && position[2][i] != 0){
+                return true;
+            }
+        }
+
+        if(position[0][0] + position[1][1] + position[2][2] == 15 && position[0][0] != 0 && position[1][1] != 0 && position[2][2] != 0){
+            return true;
+        }
+
+        if(position[2][0] + position[1][1] + position[0][2] == 15 && position[2][0] != 0 && position[1][1] != 0 && position[0][2] != 0){
+            return true;
+        }
+
+
+        return false;
     }
 }
