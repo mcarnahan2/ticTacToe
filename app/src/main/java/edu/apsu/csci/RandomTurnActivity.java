@@ -1,5 +1,6 @@
 package edu.apsu.csci;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -47,6 +48,20 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
                 Reset();
             }
         });
+
+        Button buttonQuit = findViewById(R.id.quit_button);
+        buttonQuit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     protected void onResume() {
@@ -90,6 +105,7 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
             //Tie();
             // }
         }
+
     }
 
     /* For loops to find the if X's and O's have been used three times in a row.
@@ -139,17 +155,17 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void player1Winner() {
-        Toast.makeText(this, "Winner is: Player 1 GAME OVER", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Winner is: Player 1! GAME OVER!", Toast.LENGTH_LONG).show();
         GameOver();
     }
 
     private void player2Winner() {
-        Toast.makeText(this, "Winner is: Player 2 GAME OVER", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Winner is: Player 2! GAME OVER!", Toast.LENGTH_LONG).show();
         GameOver();
     }
 
     private void Tie() {
-        Toast.makeText(this, "It's a TIE GAME OVER", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "It's a TIE! GAME OVER!", Toast.LENGTH_LONG).show();
         GameOver();
     }
     /*Both Reset() and GameOver() do the same thing setting all buttons strings to "" and setting
