@@ -101,9 +101,9 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
                 player1Winner();
             } else if (tmp == 2) {
                 player2Winner();
-            } //else if () {
-            //Tie();
-            // }
+            } else {
+            Tie();
+             }
         }
 
     }
@@ -165,8 +165,18 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void Tie() {
-        Toast.makeText(this, "It's a TIE! GAME OVER!", Toast.LENGTH_LONG).show();
-        GameOver();
+        String[][] position = new String[3][3];
+
+        for (int i = 0; i < 3; i++) {
+            for (int k = 0; k < 3; k++) {
+                position[i][k] = buttons[i][k].getText().toString();
+                if (!position[i][k].equals("")) {
+                    Toast.makeText(this, "It's a TIE! GAME OVER!", Toast.LENGTH_LONG).show();
+                    GameOver();
+                }
+            }
+        }
+
     }
     /*Both Reset() and GameOver() do the same thing setting all buttons strings to "" and setting
     player's turn back to a random integer. Reest() is for a button.
