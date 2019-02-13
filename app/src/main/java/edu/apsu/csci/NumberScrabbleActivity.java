@@ -1,11 +1,13 @@
 package edu.apsu.csci;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -58,10 +60,26 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         findViewById(R.id.submit_button).setOnClickListener(new SubmitListener());
         findViewById(R.id.rules_button).setOnClickListener(new RulesListener());
         findViewById(R.id.reset_button).setOnClickListener(new ResetListener());
+        findViewById(R.id.quit_button).setOnClickListener(new QuitListener());
 
         //sets the initial color of textView to red
         TextView tv = findViewById(R.id.textView);
         tv.setTextColor(Color.RED);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     class SubmitListener implements View.OnClickListener{
@@ -169,6 +187,14 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
             }
 
+        }
+    }
+
+    class QuitListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         }
     }
 
