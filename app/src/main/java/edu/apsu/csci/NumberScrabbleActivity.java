@@ -187,6 +187,24 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
             }
 
+            if(count==8){
+                textView.setText("Game Tied");
+                //resets the screen
+                numbersUsed.clear();
+                for(int id : ids){
+                    if(tttMap.containsKey(id)){
+                        editText = findViewById(id);
+                        editText.setText("");
+                        editText.setVisibility(View.VISIBLE);
+                        int tvId = tttMap.get(id);
+                        TextView tv = findViewById(tvId);
+                        tv.setText("0");
+                        tv.setVisibility(View.INVISIBLE);
+                    }
+
+                }
+            }
+
         }
     }
 
