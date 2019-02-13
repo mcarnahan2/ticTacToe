@@ -170,7 +170,7 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
         for (int i = 0; i < 3; i++) {
             for (int k = 0; k < 3; k++) {
                 position[i][k] = buttons[i][k].getText().toString();
-                if (!position[i][k].equals("")) {
+                if (position[i][k].equals("")) {
                     Toast.makeText(this, "It's a TIE! GAME OVER!", Toast.LENGTH_LONG).show();
                     GameOver();
                 }
@@ -185,6 +185,7 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
         for (int i = 0; i < 3; i++) {
             for (int k = 0; k < 3; k++) {
                 buttons[i][k].setText("");
+                textview_player.setText("Player's Turn: " + player1);
             }
         }
     }
@@ -193,6 +194,7 @@ public class RandomTurnActivity extends AppCompatActivity implements View.OnClic
         for (int i = 0; i < 3; i++) {
             for (int k = 0; k < 3; k++) {
                 buttons[i][k].setText("");
+                textview_player.setText("Player's Turn: " + player1);
             }
         }
     }
