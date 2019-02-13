@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NumberScrabbleActivity extends AppCompatActivity {
+    //creates the variables to be used
     private HashMap<Integer, Integer> tttMap;
     private ArrayList<Integer> numbersUsed;
     private int count=0;
@@ -31,6 +32,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_number_scrabble);
 
+        //creates the hash map and adds values into the hashmap
         tttMap = new HashMap<>();
         tttMap.put(R.id.editText00, R.id.textView00);
         tttMap.put(R.id.editText01, R.id.textView01);
@@ -44,6 +46,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
         numbersUsed = new ArrayList<>();
 
+        //initializes the array textViews
         for (int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
                 String tvID = "textView" + i + j;
@@ -56,6 +59,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         findViewById(R.id.rules_button).setOnClickListener(new RulesListener());
         findViewById(R.id.reset_button).setOnClickListener(new ResetListener());
 
+        //sets the initial color of textView to red
         TextView tv = findViewById(R.id.textView);
         tv.setTextColor(Color.RED);
     }
@@ -67,25 +71,34 @@ public class NumberScrabbleActivity extends AppCompatActivity {
             EditText editText;
             String etStr;
 
+            //starts a for loop to get all of the ids from the array ids
             for(int id : ids){
-                if(tttMap.containsKey(id)) {
-                    editText = findViewById(id);
 
+                //checks if the hashmap contains the id
+                if(tttMap.containsKey(id)) {
+
+                    editText = findViewById(id);
                     etStr = editText.getText().toString();
 
-
+                    //checks to see if etStr has anything in it
                     if(etStr.trim().length()>0){
                         int etNum = 0;
+
+                        //uses a try catch to change etStr to an integer
                         try{
                             etNum = Integer.parseInt(etStr);
                         } catch(NumberFormatException ex){
                             Log.i("IDS", "Invalid integer format");
                         }
 
+                        //gets the textview from the hashmap using the key id
                         int tvId = tttMap.get(id);
                         TextView tv = findViewById(tvId);
 
+                        //checks if the number entered is in the range 1-9 and if not shows a toast message
                         if(etNum>=1 && etNum<=9){
+
+                            //checks if the array list numbersUsed is empty to determine if this is the first time
                             if(numbersUsed.isEmpty()){
                                 tv.setText(etStr);
                                 tv.setVisibility(View.VISIBLE);
@@ -96,16 +109,18 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                                 numbersUsed.add(etNum);
 
                             } else {
+                                //checks for repeat numbers in the array list and only checks it if the editText is visible
                                 if(numbersUsed.contains(etNum)  && editText.isShown()) {
-                                    Toast.makeText(getApplicationContext(), "Please enter a number that has not been entered already", Toast.LENGTH_SHORT).show();
-                                } else if(!numbersUsed.contains(etNum)){
+                                    Toast.makeText(getApplicationContext(), "Please enter a number that has not been entered already", Toast.LENGTH_LONG).show();
+                                }
+                                //if the number is not used it sets everything
+                                else if(!numbersUsed.contains(etNum)){
                                     tv.setText(etStr);
                                     tv.setVisibility(View.VISIBLE);
                                     editText.setVisibility(View.INVISIBLE);
                                     numbersUsed.add(etNum);
 
-                                    Log.i("WHERE", "The numbers used before saved instance are " + numbersUsed);
-
+                                    //checks to see whose turn it is
                                     if(count % 2 == 0){
                                         textView.setText("Player 1's Turn");
                                         textView.setTextColor(Color.RED);
@@ -120,13 +135,15 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                                 }
                             }
                         } else{
-                            Toast.makeText(getApplicationContext(), "Not in the range", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Number must be between 1 and 9", Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             }
 
+            //checks if there is a winner
             if(winner()){
+                //checks which player had the last move
                 if(count % 2 == 0){
                     textView.setText("Player 1 is the Winner!!!!");
                     textView.setTextColor(Color.RED);
@@ -135,6 +152,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                     textView.setTextColor(Color.BLUE);
                 }
 
+                //resets the screen
                 numbersUsed.clear();
                 for(int id : ids){
                     if(tttMap.containsKey(id)){
@@ -161,6 +179,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         }
     }
 
+    //creates an alert dialog
     private void alertDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("Players will take turns choosing a number from 1 to 9 without repeating numbers.  If the player chooses a number and completes a row, and the row adds up to 15, that player wins!  To play choose a square and type in a number.  Click submit and your move will be recorded.");
@@ -200,8 +219,6 @@ public class NumberScrabbleActivity extends AppCompatActivity {
     }
 
     private boolean winner() {
-        //Integer[][] position = new Integer[3][3];
-
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
                 try{
