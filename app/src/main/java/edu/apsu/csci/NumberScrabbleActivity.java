@@ -1,7 +1,9 @@
 package edu.apsu.csci;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +23,8 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         R.id.editText20, R.id.editText21, R.id.editText22
     };
     private TextView[][] textViews = new TextView[3][3];
+    AlertDialog.Builder builder;
+    private Integer[][] position = new Integer[3][3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.submit_button).setOnClickListener(new SubmitListener());
+        findViewById(R.id.rules_button).setOnClickListener(new RulesListener());
+        findViewById(R.id.reset_button).setOnClickListener(new ResetListener());
     }
 
     class SubmitListener implements View.OnClickListener{
@@ -95,6 +101,8 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                                     editText.setVisibility(View.INVISIBLE);
                                     numbersUsed.add(etNum);
 
+                                    Log.i("WHERE", "The numbers used before saved instance are " + numbersUsed);
+
                                     if(count % 2 == 0){
                                         textView.setText("Player 1's Turn");
                                         count+=1;
@@ -118,8 +126,52 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         }
     }
 
+    class RulesListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            alertDialog();
+        }
+    }
+
+    private void alertDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Players will take turns choosing a number from 1 to 9 without repeating numbers.  If the player chooses a number and completes a row, and the row adds up to 15, that player wins!  To play choose a square and type in a number.  Click submit and your move will be recorded.");
+        dialog.setTitle("Rules");
+        dialog.setPositiveButton("Let's Play",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "Have fun!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+    }
+
+    class ResetListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            EditText et;
+            TextView textView = findViewById(R.id.textView);
+            textView.setText("Player 1's Turn");
+            numbersUsed.clear();
+            for(int id : ids){
+                if(tttMap.containsKey(id)){
+                    et = findViewById(id);
+                    et.setText("");
+                    et.setVisibility(View.VISIBLE);
+                    int tvId = tttMap.get(id);
+                    TextView tv = findViewById(tvId);
+                    tv.setText("0");
+                    tv.setVisibility(View.INVISIBLE);
+                }
+
+            }
+        }
+    }
+
     private boolean winner() {
-        Integer[][] position = new Integer[3][3];
+        //Integer[][] position = new Integer[3][3];
 
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
