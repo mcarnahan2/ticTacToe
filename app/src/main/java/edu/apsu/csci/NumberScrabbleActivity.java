@@ -55,6 +55,9 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         findViewById(R.id.submit_button).setOnClickListener(new SubmitListener());
         findViewById(R.id.rules_button).setOnClickListener(new RulesListener());
         findViewById(R.id.reset_button).setOnClickListener(new ResetListener());
+
+        TextView tv = findViewById(R.id.textView);
+        tv.setTextColor(Color.RED);
     }
 
     class SubmitListener implements View.OnClickListener{
@@ -84,12 +87,12 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
                         if(etNum>=1 && etNum<=9){
                             if(numbersUsed.isEmpty()){
-                                Log.i("WHERE", "I am in the isEmpty statement before, count is " + count);
                                 tv.setText(etStr);
                                 tv.setVisibility(View.VISIBLE);
+                                tv.setTextColor(Color.RED);
                                 editText.setVisibility(View.INVISIBLE);
-                                Log.i("WHERE", "I am in the isEmpty statement, count is " + count);
                                 textView.setText("Player 2's Turn");
+                                textView.setTextColor(Color.BLUE);
                                 numbersUsed.add(etNum);
 
                             } else {
@@ -105,9 +108,13 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
                                     if(count % 2 == 0){
                                         textView.setText("Player 1's Turn");
+                                        textView.setTextColor(Color.RED);
+                                        tv.setTextColor(Color.BLUE);
                                         count+=1;
                                     } else {
                                         textView.setText("Player 2's Turn");
+                                        textView.setTextColor(Color.BLUE);
+                                        tv.setTextColor(Color.RED);
                                         count+=1;
                                     }
                                 }
@@ -120,7 +127,28 @@ public class NumberScrabbleActivity extends AppCompatActivity {
             }
 
             if(winner()){
-                Log.i("WHERE", "Winner");
+                if(count % 2 == 0){
+                    textView.setText("Player 1 is the Winner!!!!");
+                    textView.setTextColor(Color.RED);
+                } else {
+                    textView.setText("Player 2 is the Winner!!!!");
+                    textView.setTextColor(Color.BLUE);
+                }
+
+                numbersUsed.clear();
+                for(int id : ids){
+                    if(tttMap.containsKey(id)){
+                        editText = findViewById(id);
+                        editText.setText("");
+                        editText.setVisibility(View.VISIBLE);
+                        int tvId = tttMap.get(id);
+                        TextView tv = findViewById(tvId);
+                        tv.setText("0");
+                        tv.setVisibility(View.INVISIBLE);
+                    }
+
+                }
+
             }
 
         }
@@ -154,6 +182,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
             EditText et;
             TextView textView = findViewById(R.id.textView);
             textView.setText("Player 1's Turn");
+            textView.setTextColor(Color.RED);
             numbersUsed.clear();
             for(int id : ids){
                 if(tttMap.containsKey(id)){
