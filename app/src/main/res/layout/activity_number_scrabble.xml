@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,29 +16,84 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editText00"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editText01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/editText00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="number" />
 
-        <EditText
-            android:id="@+id/editText02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/textView00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -45,29 +101,84 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editText10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editText11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/editText10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="number" />
 
-        <EditText
-            android:id="@+id/editText12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -75,29 +186,84 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editText20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editText21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/editText20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="number" />
 
-        <EditText
-            android:id="@+id/editText22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
@@ -106,4 +272,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit" />
+
+    <TextView
+        android:id="@+id/test_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 </LinearLayout>
