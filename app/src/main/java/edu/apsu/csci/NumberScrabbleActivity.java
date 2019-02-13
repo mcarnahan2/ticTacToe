@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,11 +20,11 @@ public class NumberScrabbleActivity extends AppCompatActivity {
     //creates the variables to be used
     private HashMap<Integer, Integer> tttMap;
     private ArrayList<Integer> numbersUsed;
-    private int count=0;
-    private int [] ids = {
-        R.id.editText00, R.id.editText01, R.id.editText02,
-        R.id.editText10, R.id.editText11, R.id.editText12,
-        R.id.editText20, R.id.editText21, R.id.editText22
+    private int count = 0;
+    private int[] ids = {
+            R.id.editText00, R.id.editText01, R.id.editText02,
+            R.id.editText10, R.id.editText11, R.id.editText12,
+            R.id.editText20, R.id.editText21, R.id.editText22
     };
     private TextView[][] textViews = new TextView[3][3];
     AlertDialog.Builder builder;
@@ -49,8 +50,8 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         numbersUsed = new ArrayList<>();
 
         //initializes the array textViews
-        for (int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 String tvID = "textView" + i + j;
                 int id = getResources().getIdentifier(tvID, "id", getPackageName());
                 textViews[i][j] = findViewById(id);
@@ -82,7 +83,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    class SubmitListener implements View.OnClickListener{
+    class SubmitListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             TextView textView = findViewById(R.id.textView);
@@ -90,22 +91,22 @@ public class NumberScrabbleActivity extends AppCompatActivity {
             String etStr;
 
             //starts a for loop to get all of the ids from the array ids
-            for(int id : ids){
+            for (int id : ids) {
 
                 //checks if the hashmap contains the id
-                if(tttMap.containsKey(id)) {
+                if (tttMap.containsKey(id)) {
 
                     editText = findViewById(id);
                     etStr = editText.getText().toString();
 
                     //checks to see if etStr has anything in it
-                    if(etStr.trim().length()>0){
+                    if (etStr.trim().length() > 0) {
                         int etNum = 0;
 
                         //uses a try catch to change etStr to an integer
-                        try{
+                        try {
                             etNum = Integer.parseInt(etStr);
-                        } catch(NumberFormatException ex){
+                        } catch (NumberFormatException ex) {
                             Log.i("IDS", "Invalid integer format");
                         }
 
@@ -114,10 +115,10 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                         TextView tv = findViewById(tvId);
 
                         //checks if the number entered is in the range 1-9 and if not shows a toast message
-                        if(etNum>=1 && etNum<=9){
+                        if (etNum >= 1 && etNum <= 9) {
 
                             //checks if the array list numbersUsed is empty to determine if this is the first time
-                            if(numbersUsed.isEmpty()){
+                            if (numbersUsed.isEmpty()) {
                                 tv.setText(etStr);
                                 tv.setVisibility(View.VISIBLE);
                                 tv.setTextColor(Color.RED);
@@ -128,31 +129,31 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
                             } else {
                                 //checks for repeat numbers in the array list and only checks it if the editText is visible
-                                if(numbersUsed.contains(etNum)  && editText.isShown()) {
+                                if (numbersUsed.contains(etNum) && editText.isShown()) {
                                     Toast.makeText(getApplicationContext(), "Please enter a number that has not been entered already", Toast.LENGTH_LONG).show();
                                 }
                                 //if the number is not used it sets everything
-                                else if(!numbersUsed.contains(etNum)){
+                                else if (!numbersUsed.contains(etNum)) {
                                     tv.setText(etStr);
                                     tv.setVisibility(View.VISIBLE);
                                     editText.setVisibility(View.INVISIBLE);
                                     numbersUsed.add(etNum);
 
                                     //checks to see whose turn it is
-                                    if(count % 2 == 0){
+                                    if (count % 2 == 0) {
                                         textView.setText("Player 1's Turn");
                                         textView.setTextColor(Color.RED);
                                         tv.setTextColor(Color.BLUE);
-                                        count+=1;
+                                        count += 1;
                                     } else {
                                         textView.setText("Player 2's Turn");
                                         textView.setTextColor(Color.BLUE);
                                         tv.setTextColor(Color.RED);
-                                        count+=1;
+                                        count += 1;
                                     }
                                 }
                             }
-                        } else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "Number must be between 1 and 9", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -160,9 +161,9 @@ public class NumberScrabbleActivity extends AppCompatActivity {
             }
 
             //checks if there is a winner
-            if(winner()){
+            if (winner()) {
                 //checks which player had the last move
-                if(count % 2 == 0){
+                if (count % 2 == 0) {
                     textView.setText("Player 1 is the Winner!!!!");
                     textView.setTextColor(Color.RED);
                 } else {
@@ -172,8 +173,8 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
                 //resets the screen
                 numbersUsed.clear();
-                for(int id : ids){
-                    if(tttMap.containsKey(id)){
+                for (int id : ids) {
+                    if (tttMap.containsKey(id)) {
                         editText = findViewById(id);
                         editText.setText("");
                         editText.setVisibility(View.VISIBLE);
@@ -187,12 +188,12 @@ public class NumberScrabbleActivity extends AppCompatActivity {
 
             }
 
-            if(count==8){
+            if (count == 8) {
                 textView.setText("Game Tied");
                 //resets the screen
                 numbersUsed.clear();
-                for(int id : ids){
-                    if(tttMap.containsKey(id)){
+                for (int id : ids) {
+                    if (tttMap.containsKey(id)) {
                         editText = findViewById(id);
                         editText.setText("");
                         editText.setVisibility(View.VISIBLE);
@@ -200,6 +201,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
                         TextView tv = findViewById(tvId);
                         tv.setText("0");
                         tv.setVisibility(View.INVISIBLE);
+                        count=0;
                     }
 
                 }
@@ -208,7 +210,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         }
     }
 
-    class QuitListener implements View.OnClickListener{
+    class QuitListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -216,7 +218,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         }
     }
 
-    class RulesListener implements View.OnClickListener{
+    class RulesListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             alertDialog();
@@ -239,7 +241,7 @@ public class NumberScrabbleActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    class ResetListener implements View.OnClickListener{
+    class ResetListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             EditText et;
@@ -247,8 +249,8 @@ public class NumberScrabbleActivity extends AppCompatActivity {
             textView.setText("Player 1's Turn");
             textView.setTextColor(Color.RED);
             numbersUsed.clear();
-            for(int id : ids){
-                if(tttMap.containsKey(id)){
+            for (int id : ids) {
+                if (tttMap.containsKey(id)) {
                     et = findViewById(id);
                     et.setText("");
                     et.setVisibility(View.VISIBLE);
@@ -263,33 +265,33 @@ public class NumberScrabbleActivity extends AppCompatActivity {
     }
 
     private boolean winner() {
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                try{
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                try {
                     position[i][j] = Integer.parseInt(textViews[i][j].getText().toString());
-                } catch(NumberFormatException ex){
+                } catch (NumberFormatException ex) {
                     Log.i("IDS", "Invalid integer format");
                 }
             }
         }
 
-        for(int i = 0; i < 3; i++){
-            if(position[i][0] + position[i][1] + position[i][2] == 15 && position[i][0] != 0 && position[i][1] != 0 && position[i][2] != 0){
+        for (int i = 0; i < 3; i++) {
+            if (position[i][0] + position[i][1] + position[i][2] == 15 && position[i][0] != 0 && position[i][1] != 0 && position[i][2] != 0) {
                 return true;
             }
         }
 
-        for(int i = 0; i < 3; i++){
-            if(position[0][i] + position[1][i] + position[2][i] == 15 && position[0][i] != 0 && position[1][i] != 0 && position[2][i] != 0){
+        for (int i = 0; i < 3; i++) {
+            if (position[0][i] + position[1][i] + position[2][i] == 15 && position[0][i] != 0 && position[1][i] != 0 && position[2][i] != 0) {
                 return true;
             }
         }
 
-        if(position[0][0] + position[1][1] + position[2][2] == 15 && position[0][0] != 0 && position[1][1] != 0 && position[2][2] != 0){
+        if (position[0][0] + position[1][1] + position[2][2] == 15 && position[0][0] != 0 && position[1][1] != 0 && position[2][2] != 0) {
             return true;
         }
 
-        if(position[2][0] + position[1][1] + position[0][2] == 15 && position[2][0] != 0 && position[1][1] != 0 && position[0][2] != 0){
+        if (position[2][0] + position[1][1] + position[0][2] == 15 && position[2][0] != 0 && position[1][1] != 0 && position[0][2] != 0) {
             return true;
         }
 
